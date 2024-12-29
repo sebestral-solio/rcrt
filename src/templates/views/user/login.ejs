@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/login/login_style.css">
+  <title>Smart Hiring System</title>
+	<!-- add icon link -->
+	<link rel="icon" href="images/logo_dark.png" type="image/x-icon"> 
+	<style>
+		.forgot-password {
+  text-align: left;
+  margin-bottom: 10px; /* Add some space between the link and the next form elements */
+}
+
+.forgot-password a {
+  font-size: 13px; /* Optional: Adjust the font size */
+  color: rgb(42,29,90); /* Optional: Adjust the color */
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+	</style>
+</head>
+<body>
+	<div id="myDiv">
+		<div id="logo">
+			<img src="images/logo_dark.png" width="180px"/>
+		</div>
+		<div class="copyright">
+			 &copy; ROE By CSE_Boys 
+		</div>
+    <div class="dots-3"></div>
+	</div>
+  <div id="container" class="container">
+		<!-- FORM SECTION -->
+		<div class="row">
+			<!-- SIGN UP -->
+			<div class="col align-items-center flex-col sign-up">
+				<div class="form-wrapper align-items-center">
+					<form class="form sign-up" action="/signup" method="POST">
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input id="Email" name="Email" type="email" placeholder="Email *" required>
+						</div>
+						<button id="create-acct-btn" type="submit">Send Verification Link</button>
+						<p>
+							<span>
+								Already have an account?
+							</span>
+							<b onclick="toggle()" class="pointer">
+								Sign in here
+							</b>
+						</p>
+					</form>
+				</div>
+			</div>
+			<!-- END SIGN UP -->
+			<!-- SIGN IN -->
+			<div class="col align-items-center flex-col sign-in">
+				<div class="form-wrapper align-items-center">
+					<form class="form sign-in" action="/login" method="POST">
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input id="Email" name="Email" type="text" placeholder="Email &#42;" required>
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input id="Password" name="Password" type="password" placeholder="Password &#42;" required>
+						</div>
+						<p class="forgot-password">
+							<b class="forget-btn">
+                                <a href="/forgot" id="forgot">
+								Forgot password?
+                            </a>
+							</b>
+						</p>
+						<button id="submit" type="submit">Submit</button>
+								<p style="font-weight: bold; font-size: medium;">or</p>
+							<a href="/auth/google" class="google-login">
+									<img src="/images/google.png" style="width:20px" class="me-2" alt="Google Logo">
+									<small>Log in with Google</small></a>
+						
+						
+						<p>
+							<span>
+								Don't have an account?
+							</span>
+							<b onclick="toggle()" class="pointer">
+								Sign up here
+							</b>
+						</p>
+					</form>
+				</div>
+			</div>
+			<!-- END SIGN IN -->
+		</div>
+		<!-- END FORM SECTION -->
+		<!-- CONTENT SECTION -->
+		<div class="row content-row">
+			<!-- SIGN IN CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="text sign-in">
+					<h2>ROE's <br>
+						Happy To See <br>You! 
+					</h2>
+				</div>
+				<div class="img sign-in">
+				</div>
+			</div>
+			<!-- END SIGN IN CONTENT -->
+			<!-- SIGN UP CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="img sign-up">
+				</div>
+				<div class="text sign-up">
+					<h2>
+						ROE <br> Welcomes You! 
+					</h2>
+				</div>
+			</div>
+			<!-- END SIGN UP CONTENT -->
+		</div>
+		<!-- END CONTENT SECTION -->
+	</div>
+
+	<script>
+		document.querySelector(".container").classList.add("hidden");
+		setTimeout(function(){
+			document.getElementById("myDiv").style.display = "none";
+			document.querySelector(".container").classList.remove("hidden");
+		},2000);
+    
+		let container = document.getElementById('container')
+		toggle = () => {
+			container.classList.toggle('sign-in')
+			container.classList.toggle('sign-up')
+		}
+		setTimeout(() => {
+			container.classList.add('sign-in')
+		}, 2050)
+
+          //error message removing after certain time
+    //       function removeErrorMessage() {
+    // var errorMessage = document.querySelector('.error-message');
+    // if (errorMessage) {
+    //     errorMessage.remove();
+    // }
+    // }
+
+    // // Call the function after a certain duration (in milliseconds)
+    // var errorMessageTimeout = setTimeout(removeErrorMessage, 1000); // Adjust the duration as needed (3000 milliseconds = 3 seconds)
+
+
+    // // Remove the error message when the user scrolls the page
+    // document.addEventListener('scroll', function () {
+    //     clearTimeout(errorMessageTimeout);
+    //     removeErrorMessage(); // Remove the error message on scroll interaction
+    // });
+
+    const loginForm = document.querySelector('.form.sign-in');
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(loginForm);
+        const email = formData.get('Email');
+        const password = formData.get('Password');
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Email: email, Password: password }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Successful login, redirect to the dashboard
+                window.location.href = result.redirect;
+            } else {
+                // Show error message in an alert box
+                alert(result.error);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An unexpected error occurred. Please try again later.');
+        }
+    });
+
+    const signupForm = document.querySelector('.form.sign-up');
+    signupForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(signupForm);
+        const email = formData.get('Email');
+
+        try {
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Email: email }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Show success message in an alert box
+                alert(result.message);
+            } else {
+                // Show error message in an alert box
+                alert(result.error);
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+            alert('An unexpected error occurred. Please try again later.');
+        }
+    });
+
+
+
+	</script>
+	
+	<!-- <script src="/js/login_script.js"></script> -->
+</body>
+</html>

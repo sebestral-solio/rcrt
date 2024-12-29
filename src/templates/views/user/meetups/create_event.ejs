@@ -1,0 +1,683 @@
+<%- include('../../partials/loader') %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+        <meta name="author" content="AdminKit">
+        <meta name="keywords"
+            content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="shortcut icon" href="images/icons/icon-48x48.png" />
+
+        <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+        <title>ROE | Create Event</title>
+
+        <link href="css/app.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <style>
+            .card {
+                background-color: rgb(241, 234, 255);
+                border: 1.5px solid rgb(216, 216, 216);
+                border-radius: 10px;
+            }
+
+            .card-header {
+                font-size: 1.3rem;
+                font-weight: bolder;
+                background: transparent;
+                border-radius: 10px;
+                color: grey;
+            }
+
+            .card:hover {
+                cursor: pointer;
+                border: 2px solid rgb(66, 54, 120);
+            }
+
+            .content {
+                overflow: auto;
+            }
+
+            label {
+                margin-bottom: 1%;
+                font-size: medium;
+                font-weight: bold;
+            }
+
+            p {
+
+                font-size: small;
+            }
+
+            .form-control {
+                margin-bottom: 1%;
+
+                border-radius: 5px;
+            }
+
+            .custom-file-upload {
+                font-size: small;
+                display: inline-block;
+                padding: 3px 5px;
+                cursor: pointer;
+                color: black;
+                background-color: transparent;
+                border: 1px solid rgb(66, 54, 120);
+                border-radius: 30px;
+                transition: background-color 0.3s ease;
+            }
+
+            .custom-file-upload:hover {
+                color: white;
+                background-color: rgb(66, 54, 120);
+            }
+
+            .custom-file-upload input[type="file"] {
+                display: none;
+            }
+
+
+
+            .preview-section {
+                border: 1.5px solid rgb(216, 216, 216);
+                border-radius: 25px;
+                background-color: white;
+                padding: 1rem 1rem 0.5rem 1rem;
+            }
+
+            .preview-section img {
+                border: 2px solid rgb(217, 217, 217);
+                border-radius: 20px;
+            }
+
+            .price-seats {
+                display: flex;
+            }
+
+            .price-seats .preview-link {
+                margin-left: auto;
+            }
+
+            .is-invalid {
+                border-color: #dc3545;
+            }
+
+            .is-invalid:focus {
+                box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+            }
+
+            .marks {
+                font-weight: lighter;
+                color: red;
+            }
+
+            #event-title-preview {
+                font-weight: bolder;
+            }
+
+            .save {
+                background-color: rgb(66, 54, 120);
+                transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            }
+
+            .save:hover {
+                background-color: rgb(66, 54, 120);
+                transform: scale(1.1);
+            }
+
+            .prev {
+                color: black;
+                background-color: transparent;
+                border: 1px solid rgb(66, 54, 120);
+            }
+
+            .prev:hover {
+                color: white;
+                background-color: rgb(66, 54, 120);
+            }
+
+            .organizer-details-container {
+                border: 1.5px solid #ccc;
+                padding: 20px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
+            .organizer-details-container h4 {
+                font-weight: bold;
+                margin-top: 0;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <nav id="sidebar" class="sidebar js-sidebar">
+                <div class="sidebar-content js-simplebar">
+                    <a class="sidebar-brand mb-3" href="user_dashboard">
+                        <img src="/images/logo_white.png" width="44" height="44" alt="Adex home" class="logo-light"
+                            style="margin-top: -5%; margin-left: -5%;">
+                        <span class="align-middle" style="font-size: medium;">Republic of <span
+                                class="engineers">Engineers</span></span>
+                    </a>
+                    <ul class="sidebar-nav">
+                        <!-- <li class="sidebar-header">
+						Pages
+					</li> -->
+                        <li class="sidebar-item mb-3">
+                            <a class="sidebar-link" href="user_dashboard">
+                                <i class="align-middle fas fa-home"></i>
+                                <span class="align-middle">Home</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item mb-3">
+                            <a data-bs-target="#aspirants" data-bs-toggle="collapse" class="sidebar-link"
+                                aria-expanded="true">
+                                <i class="align-middle fas fa-book-reader"></i>
+
+                                <span class="align-middle" style="margin-right: 5%;">Engineering Aspirants</span><i
+                                    class="align-middle fas fa-angle-down"></i><i
+                                    class="align-middle fas fa-angle-up d-none"></i>
+                            </a>
+                            <ul id="aspirants" class="sidebar-dropdown list-unstyled collapse"
+                                data-bs-parent="#sidebar">
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="entrance_exams"><i class="align-middle fas fa-pencil-alt"></i>
+                                        Entrance Exams</a></li>
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="explore_branches"><i class="align-middle fas fa-search"></i>
+                                        Explore Branches</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a data-bs-target="#students" data-bs-toggle="collapse" class="sidebar-link"
+                                aria-expanded="true">
+                                <i class="align-middle fas fa-user-graduate"></i>
+                                <span class="align-middle" style="margin-right: 7%;">Engineering Students</span><i
+                                    class="align-middle fas fa-angle-down"></i><i
+                                    class="align-middle fas fa-angle-up d-none"></i>
+                            </a>
+                            <ul id="students" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="higher_study_guidance"><i class="align-middle fas fa-graduation-cap"></i>
+                                        Higher Study Guidance</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a data-bs-target="#meetups" data-bs-toggle="collapse" class="sidebar-link"
+                                aria-expanded="true">
+                                <i class="align-middle fas fa-users"></i>
+                                <span class="align-middle" style="margin-right: 43%;">Meetups</span><i 
+                                class="align-middle fas fa-angle-down d-none"></i> <i class="align-middle fas fa-angle-up"></i>
+                            </a>
+                            <ul id="meetups" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="events_explorer"><i class="align-middle fas fa-search"></i>
+                                        Events Explorer</a></li>
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="my_events"><i class="align-middle fas fa-calendar-alt"></i>
+                                        My Events</a></li>
+                                <li class="sidebar-item active submenu" style="margin-left: 12%;"><a
+                                        class="sidebar-link" href="create_event"><i
+                                            class="align-middle fas fa-plus"></i>
+                                        Create Event</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a class="sidebar-link" href="settings">
+                                <i class="align-middle fas fa-cog"></i>
+                                <span class="align-middle">Settings</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a class="sidebar-link" href="/logout">
+                                <i class="align-middle fas fa-sign-out-alt"></i>
+                                <span class="align-middle">Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="main">
+                <nav class="navbar navbar-expand navbar-light navbar-bg">
+                    <a class="sidebar-toggle js-sidebar-toggle">
+                        <i class="hamburger align-self-center"></i>
+                    </a>
+
+                    <div class="navbar-collapse collapse">
+                        <ul class="navbar-nav navbar-align">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                                    data-bs-toggle="dropdown">
+                                    <img src="images/avatars/profile.png" class="avatar img-fluid rounded-5 me-1"
+                                        alt="Charles Hall" />
+                                </a>
+
+                                <a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                    <img src="images/avatars/profile.png" class="avatar img-fluid rounded-5 me-1"
+                                        alt="Charles Hall" /> <span class="text-dark"><strong>My Profile</strong></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="profile"><i class="align-middle me-1"
+                                            data-feather="user"></i> Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="settings"><i class="align-middle me-1"
+                                            data-feather="settings"></i> Settings & Privacy</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logout">Log out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main class="content">
+                    <div class="container-fluid p-0">
+                        <div class="multi-step-form">
+                            <!-- Single Form -->
+                                 <form id="event-creation-form" action="/create_event" method="POST" enctype="multipart/form-data">
+                            <!-- Step 1: Build Event -->
+                            <div id="step-1" class="step active">
+                                <h1 class="step-heading">Step 1: Build Your Event</h1>
+                                <hr class="mb-4">
+                                <div id="required-error"
+                                    style="color: red; display: none; margin-bottom: 1%; font-weight: bold; text-align: center;">
+                                    All Fields Are required.</div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 mb-1">
+                                            <div class="card" id="card-event-overview">
+                                                <div class="card-header" id="btn-event-overview">
+                                                    Event Overview
+                                                    <span class="float-end" id="toggle-event-overview">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="card-body custom-section" id="section-event-overview"
+                                                    style="display: none;">
+                                                    <div id="event-overview-form">
+                                                        <div class="form-group mb-4">
+                                                            <label for="event_title">Event Title <span
+                                                                    class="marks">*</span></label>
+                                                            <p>Be Clear with your event title.</p>
+                                                            <input type="text" class="form-control" id="event_title"
+                                                                name="event_title" placeholder="Enter event title"
+                                                                maxlength="25" required oninput="updatePreview()">
+                                                        </div>
+                                                        <div class="form-group mb-4">
+                                                            <label for="event_description">Event Description <span
+                                                                    class="marks">*</span></label>
+                                                            <p>Give short description that grab people's attention.</p>
+                                                            <textarea class="form-control" id="event_description"
+                                                                name="event_description"
+                                                                placeholder="Enter event description" maxlength="140"
+                                                                required></textarea>
+                                                        </div>
+                                                        <div class="form-group mb-4">
+                                                            <label for="event_poster">Event Poster <span
+                                                                    class="marks">*</span>
+                                                            </label>&nbsp;&nbsp;
+                                                            <label class="custom-file-upload"> Upload
+                                                                <input type="file" class="form-control-file"
+                                                                    id="event_poster" name="event_poster"
+                                                                    accept="image/*" onchange="previewImage(event)"
+                                                                    required>
+                                                            </label>
+                                                            <div id="poster-preview"></div>
+                                                        </div>
+                                                    </div>    <!-------------->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-1">
+                                            <div class="card" id="card-date-time-location">
+                                                <div class="card-header" id="btn-date-time-location">
+                                                    Event Schedule
+                                                    <span class="float-end" id="toggle-date-time-location">
+                                                        <i class="fas fa-plus"></i>
+                                                </div>
+                                                <div class="card-body custom-section" id="section-date-time-location"
+                                                    style="display: none;">
+                                                    <div id="date-time-location-form">
+                                                        <div class="form-group">
+                                                            <label for="event_date">Event Date <span
+                                                                    class="marks">*</span></label>
+                                                            <input type="date" class="form-control" id="event_date"
+                                                                name="event_date" required oninput="updatePreview()">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="start_time">Start Time <span
+                                                                    class="marks">*</span></label>
+                                                            <input type="time" class="form-control" id="start_time"
+                                                                name="start_time" required oninput="updatePreview()">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="end_time">End Time <span
+                                                                    class="marks">*</span></label>
+                                                            <input type="time" class="form-control" id="end_time"
+                                                                name="end_time" required oninput="updatePreview()">
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <label>Schedule Type <span
+                                                                    class="marks">*</span></label><br>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="schedule_type" id="online" value="online"
+                                                                    onchange="toggleLocationInput()">
+                                                                <label class="form-check-label"
+                                                                    for="online">Online</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="schedule_type" id="offline" value="offline"
+                                                                    onchange="toggleLocationInput()" checked>
+                                                                <label class="form-check-label"
+                                                                    for="offline">Offline</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="location-group">
+                                                            <label for="event_address">Address<span
+                                                                    class="marks">*</span></label>
+                                                            <input type="text" class="form-control" id="event_address"
+                                                                name="event_address" placeholder="Enter event address"
+                                                                required>
+                                                        </div>
+                                                        <div class="location-group">
+                                                            <label for="event_city">City<span
+                                                                    class="marks">*</span></label>
+                                                            <input type="text" class="form-control" id="event_city"
+                                                                name="event_city" placeholder="Enter event city"
+                                                                required>
+                                                        </div>
+                                                        <div class="location-group">
+                                                            <label for="event_state">State<span
+                                                                    class="marks">*</span></label>
+                                                            <input type="text" class="form-control" id="event_state"
+                                                                name="event_state" placeholder="Enter event state"
+                                                                required>
+                                                        </div>
+                                                        <div class="location-group">
+                                                            <label for="event_pincode">Pincode<span
+                                                                    class="marks">*</span></label>
+                                                            <input type="text" class="form-control" id="event_pincode"
+                                                                name="event_pincode" placeholder="Enter event pincode"
+                                                                pattern="\d*" title="Please enter only numbers"
+                                                                required>
+                                                        </div>
+                                                    </div> <!-------------->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-1">
+                                            <div class="card" id="card-about-event">
+                                                <div class="card-header" id="btn-about-event">
+                                                    Event Agenda
+                                                    <span class="float-end" id="toggle-about-event">
+                                                        <i class="fas fa-plus"></i>
+                                                </div>
+                                                <div class="card-body custom-section" id="section-about-event"
+                                                    style="display: none;">
+                                                    <div id="about-event-form">
+                                                        <div class="form-group">
+                                                            <p>Please share a brief overview and the planned activities
+                                                                for this event. <span class="marks">*</span></p>
+                                                            <textarea class="form-control" id="event_agenda"
+                                                                name="event_agenda" style="height: 150px;"
+                                                                required></textarea>
+                                                        </div>
+                                                    </div>   <!-------------->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button-group mt-4">
+                                        <button type="button" class="btn btn-primary btn-step float-end save"
+                                            onclick="validateStep1()">Save & Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Add Tickets Section -->
+                            <div id="step-2" class="step">
+                                <h1 class="step-heading">Step 2: Create Tickets</h1>
+                                <hr class="mb-4">
+                                <div id="required-error2"
+                                    style="color: red; display: none; margin-bottom: 1%; font-weight: bold; text-align: center;">
+                                    All Fields Are required.</div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 mb-1">
+                                            <div class="card" id="card-event-overview">
+                                                <div class="card-header" id="btn-event-ticket">
+                                                    Create Your Own
+                                                    <span class="float-end" id="toggle-event-ticket">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="card-body custom-section" id="section-event-ticket"
+                                                    style="display: none;">
+                                                    <div id="event-ticket-form">
+                                                        <div class="form-group mb-4">
+                                                            <label for="ticket_title">Ticket Name <span
+                                                                    class="marks">*</span></label>
+                                                            <input type="text" class="form-control" id="ticket_title"
+                                                                name="ticket_title" placeholder="Enter ticket name"
+                                                                maxlength="25" required>
+                                                        </div>
+                                                        <div class="form-group mb-4">
+                                                            <label for="ticket_description">Ticket Description <span
+                                                                    class="marks">*</span></label>
+                                                            <p>Describe the benefits or features included with this
+                                                                ticket.</p>
+                                                            <textarea class="form-control" id="ticket_description"
+                                                                name="ticket_description"
+                                                                placeholder="Enter ticket features" maxlength="140"
+                                                                required></textarea>
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <label>Ticket Type <span class="marks">*</span></label><br>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="ticket_type" id="free" value="free"
+                                                                    onchange="toggleTicketInput()">
+                                                                <label class="form-check-label" for="free">Free</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="ticket_type" id="paid" value="paid"
+                                                                    onchange="toggleTicketInput()" checked>
+                                                                <label class="form-check-label" for="paid">Paid</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group mb-4" id="ticketPrice">
+                                                            <label for="ticket_price">Ticket Price <span
+                                                                    class="marks">*</span></label>
+                                                            <input type="number" class="form-control" id="ticket_price"
+                                                                name="ticket_price"
+                                                                placeholder="Enter ticket price in Rs"
+                                                                oninput="updatePreview()" value="0">
+                                                        </div>
+                                                        <div class="form-group mb-4">
+                                                            <label for="ticket_quantity">Available Quantity <span
+                                                                    class="marks">*</span></label>
+                                                            <input type="number" class="form-control"
+                                                                id="ticket_quantity" name="ticket_quantity"
+                                                                placeholder="Enter tickets Quantity"
+                                                                oninput="updatePreview()" required>
+                                                        </div>
+                                                        <div class="sales">
+                                                            <div class="form-group mb-3">
+                                                                <label for="ticket_date">Sales Start Date <span
+                                                                        class="marks">*</span></label>
+                                                                <input type="date" class="form-control" id="ticket_date"
+                                                                    name="ticket_date" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ticket_end_date">Sales End Date <span
+                                                                        class="marks">*</span></label>
+                                                                <input type="date" class="form-control"
+                                                                    id="ticket_end_date" name="ticket_end_date"
+                                                                    required>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div id="date-error"
+                                                            style="color: red; display: none; font-weight: bold;">Enter
+                                                            Valid Start and End Dates For Ticket Sales.</div>
+
+                                                    </div> <!-------------->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary btn-step float-start prev"
+                                        onclick="prevStep('#step-2', '#step-1')">Previous</button>
+                                    <button type="button" class="btn btn-primary btn-step float-end save"
+                                        onclick="validateStep2()">Save & Continue</button>
+                                </div>
+                            </div>
+                            <!-- Step 3: Publish Event Section -->
+                            <div id="step-3" class="step">
+                                <h1 class="step-heading">Step 3: Ready To Host</h1>
+                                <hr class="mb-4">
+                                <div id="required-error3"
+                                    style="color: red; display: none; margin-bottom: 1%; font-weight: bold; text-align: center;">
+                                    All Fields Are required.</div>
+                                <div id="publish-event-form">
+                                    <div class="preview-section mb-4">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <img id="event-poster-preview" src="images/avatars/profile.png"
+                                                    alt="Event Poster" class="img-fluid"
+                                                    style="max-height: 150px; width: 500px;">
+                                            </div>
+                                            <div class="col-md-8 mt-3">
+                                                <h2 id="event-title-preview"></h2>
+                                                <p id="event-time-preview"></p>
+                                                <p id="event-location-preview"></p>
+                                                <div id="price-seats" class="price-seats"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="organizer-details-container">
+                                        <h4>Organizer Details</h4>
+                                        <div class="form-group mb-4">
+                                            <label for="organization_name">Organization Name <span
+                                                    class="marks">*</span></label>
+                                            <input type="text" class="form-control" id="organization_name"
+                                                name="organization_name" placeholder="Enter Organization name"
+                                                maxlength="25" required>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="organizer_name">Organized By <span
+                                                    class="marks">*</span></label>
+                                            <input type="text" class="form-control" id="organizer_name"
+                                                name="organizer_name" placeholder="Enter Organizer name" maxlength="25"
+                                                required>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="organizer_contact">Contact <span class="marks">*</span></label>
+                                            <input type="text" class="form-control" id="organizer_contact"
+                                                name="organizer_contact" placeholder="Enter Contact Number"
+                                                pattern="\d*" maxlength="13" required>
+                                        </div>
+                                        <div class="form-group mb-2 form-check">
+                                            <input type="checkbox" class="form-check-input" id="contact_visibility" name="contact_visibility" value="1">
+                                            <label class="form-check-label" for="contact_visibility" style="font-weight: lighter; font-size: smaller;">Make contact public</label>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="form-row mb-4">
+                                        <div class="col mb-4">
+                                            <label for="event_type">Event Type <span class="marks">*</span></label>
+                                            <select class="form-control" id="event_type" name="event_type" required>
+                                                <option value="" class="not-working">Select Event Type</option>
+                                                <option value="conference">Conference</option>
+                                                <option value="workshop">Workshop</option>
+                                                <option value="seminar">Seminar</option>
+                                                <option value="convention">Convention</option>
+                                                <option value="fest">Festival</option>
+                                                <option value="concert">Concert or Performance</option>
+                                                <option value="screening">Screening</option>
+                                                <option value="dinner">Dinner</option>
+                                                <option value="party">Party or Gathering</option>
+                                                <option value="competition">Competition</option>
+                                                <option value="tournament">Tournament</option>
+                                                <option value="trip">Trip or Camp</option>
+                                                <option value="other">other</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="event_category">Event Category <span
+                                                    class="marks">*</span></label>
+                                            <select class="form-control" id="event_category" name="event_category"
+                                                required>
+                                                <option value="">Select Event Category</option>
+                                                <option value="technology">Technology</option>
+                                                <option value="education">Education</option>
+                                                <option value="health">Health</option>
+                                                <option value="sports">Sports</option>
+                                                <option value="food">Food & Drink</option>
+                                                <option value="community">Community & Culture</option>
+                                                <option value="business">Business & Professional</option>
+                                                <option value="travel">Travel & Outdoor</option>
+                                                <option value="charity">Charity</option>
+                                                <option value="hobbies">Hobbies</option>
+                                                <option value="entertainment">Entertainment</option>
+                                                <option value="other">other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="button-group">
+                                        <button type="button" class="btn btn-outline-primary btn-step float-start prev"
+                                            onclick="prevStep('#step-3', '#step-2')">Previous</button>
+                                        <button type="submit" class="btn btn-success btn-step float-end"
+                                            onclick="validateStep3()">Host Event</button>
+                                    </div>
+                                </div>  <!-------------->
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row text-muted">
+                            <div class="col-12">
+                                <p class="mb-0">
+                                    &copy; <a class="text-muted footer-title no-hover" href="#"> <strong>Republic of
+                                            Engineers.</strong></a> All rights reserved
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+
+
+        <script src="js/app.js"></script>
+        <script src="js/scripts.js"></script>
+    </body>
+
+    </html>

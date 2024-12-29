@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/mcq/style.css" />
+    <title>Technical-Round</title>
+    <link rel="icon" href="/images/logo_white.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <style>
+
+body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(-45deg, #2c3e50, rgb(42,29,90), #8e44ad, #3e8e7e);
+        background-size: 400% 400%;
+        animation: gradientBG 10s ease infinite;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Floating Bubbles */
+      .floating-bubble {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        animation: float 20s ease-in-out infinite, move 10s linear infinite;
+        opacity: 0.8;
+      }
+
+      .bubble-small {
+        width: 30px;
+        height: 30px;
+      }
+
+      .bubble-medium {
+        width: 50px;
+        height: 50px;
+      }
+
+      .bubble-large {
+        width: 80px;
+        height: 80px;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-50px) scale(1.2);
+        }
+        100% {
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes move {
+        0% {
+          left: -10%;
+        }
+        100% {
+          left: 110%;
+        }
+      }
+      
+            /* Initial States */
+      .info_box,
+      .quiz_box,
+      .result_box {
+          display: none;
+      }
+
+      /* Active States */
+      .activeInfo {
+          display: block;
+      }
+
+      .activeQuiz {
+          display: block;
+      }
+
+      .activeResult {
+          display: block;
+      }
+
+      .result_box {
+    display: none; /* Hidden by default */
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Arrange items in a column */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    background-color: #f8f9fa; /* Optional: Add background color */
+    text-align: center; /* Center the text */
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in height/width calculations */
+}
+
+.result_box .icon {
+    font-size: 10px; /* Larger icon size */
+    color: rgb(42, 29, 90); /* Gold color for the crown */
+    margin-bottom: 20px; /* Add spacing below the icon */
+}
+
+.result_box .complete_text {
+    font-size: 24px; /* Larger font size for the text */
+    font-weight: bold; /* Make it bold */
+    margin-bottom: 10px; /* Add spacing below the text */
+}
+
+.result_box .wait_text {
+    font-size: 18px; /* Slightly smaller font size for the wait text */
+    color: #333; /* Optional: Darker text color */
+}
+
+.hidden {
+        display: none;
+        }
+
+            /* Style for the congratulations message */
+      .congratulations_text {
+        font-weight: bold;  /* Make the text bold */
+        color: black;       /* Set text color to black */
+        font-size: 18px;     /* Set font size */
+        margin-bottom: 10px; /* Add some space below the message */
+        text-align: center;  /* Center align the text */
+      }
+
+      /* Style for the 'Continue to Next Round' button */
+      .continue_next_round {
+        background-color: rgb(42, 29, 90);        /* White background */
+        border: 2px solid transparent;  /* Transparent border by default */
+        border-radius: 30px;            /* Rounded corners */
+        padding: 10px 20px;              /* Padding for button size */
+        color: white;                   /* Black text */
+        font-size: 16px;                 /* Font size */
+        font-weight: bold;               /* Make text bold */
+        cursor: pointer;                /* Change cursor to pointer */
+        text-align: center;              /* Center align text */
+        transition: all 0.3s ease;       /* Smooth transition for hover effects */
+      }
+
+      /* Hover effect for the button */
+      .continue_next_round:hover {
+        background-color: transparent; /* Make the background transparent */
+        border: 2px solid rgb(42, 29, 90);            /* White border on hover */
+        color: rgb(42, 29, 90);                   /* Change text color to white */
+      }
+
+      .better_luck_text {
+        font-weight: bold;  /* Make the text bold */
+        color: black;       /* Set text color to black */
+        font-size: 18px;     /* Set font size */
+        margin-bottom: 10px; /* Add some space below the message */
+        text-align: center;  /* Center align the text */
+      }
+
+      /* Style for the 'Continue to Next Round' button */
+      .exit_btn {
+        background-color: rgb(42, 29, 90);        /* White background */
+        border: 2px solid transparent;  /* Transparent border by default */
+        border-radius: 30px;            /* Rounded corners */
+        padding: 0px 20px;              /* Padding for button size */
+        color: white;                   /* Black text */
+        font-size: 16px;                 /* Font size */
+        font-weight: bold;               /* Make text bold */
+        cursor: pointer;                /* Change cursor to pointer */
+        text-align: center;              /* Center align text */
+        transition: all 0.3s ease;       /* Smooth transition for hover effects */
+      }
+
+      /* Hover effect for the button */
+      .exit_btn:hover {
+        background-color: transparent; /* Make the background transparent */
+        border: 2px solid rgb(42, 29, 90);            /* White border on hover */
+        color: rgb(42, 29, 90);                   /* Change text color to white */
+      }
+
+      textarea#answer_text {
+        width: calc(100% - 20px); /* Makes the textarea as wide as its container minus padding */
+        height: 150px; /* Adjust height as needed */
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        resize: none; /* Disable manual resizing */
+      }
+
+      .next_btn:hover {
+  background-color: transparent;
+  border: 2px solid rgb(42, 29, 90);
+  color: rgb(42, 29, 90);
+}
+header {
+      background-color: transparent;
+      color: rgb(42, 29, 90);
+      padding: 5px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .logo img {
+      width: 50px;
+      margin-right: 10px;
+    }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      padding: 0;
+      margin-left: 850%;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      color: rgb(42, 29, 90);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      display: inline-block;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+      transform: translateY(-2px);
+    }
+      /* Video display */
+      video {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #fff;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Video display section (real-time streaming) -->
+    <video id="videoStream" autoplay muted></video>
+
+    <!-- Recorded Video section (to show recorded video later) -->
+    <video id="recordedVideo" controls style="display:none; margin-top: 10px;"></video>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <img src="/images/logo_white.png"  style="width: 100px; height: auto;" />
+        </div>
+        <nav>
+          <!-- <ul>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul> -->
+        </nav>
+      </div>
+    </header>
+    <!-- start Quiz button -->
+    <div class="start_btn"><button>Start Technical Round</button></div>
+
+    <!-- Info Box -->
+    <div class="info_box">
+      <div class="info-title"><span>Rules for the round</span></div>
+      <div class="info-list">
+        <div class="info">
+          1. Once you submit your answer, it can't be undone.
+        </div>
+        <div class="info">
+          2. You will have only 30 seconds per each question.
+        </div>
+        <div class="info">
+          3. You'll get points based on the similarity of your answer.
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="quit">Exit</button>
+        <button class="restart">Continue</button>
+      </div>
+    </div>
+
+    <!-- Quiz Box -->
+    <div class="quiz_box">
+      <header>
+        <div class="title">Technical Round</div>
+        <div class="timer">
+          <div class="time_left_txt">Time Left</div>
+          <div class="timer_sec">60</div>
+        </div>
+        <div class="time_line"></div>
+      </header>
+      <section>
+        <div class="que_text"></div>
+        <textarea id="answer_text" placeholder="Type your answer here..."></textarea>
+      </section>
+
+      <footer>
+        <div class="total_que">
+          <span id="current_question">1</span> of <span id="total_questions"></span>
+        </div>
+        <button class="next_btn">Save & Next</button>
+      </footer>
+      
+    </div>
+
+    <div id="user_email" data-user-email="<%= userEmail %>"></div>
+    <div id="company_id" data-company-id="<%= jobId %>"></div>
+
+    <!-- Result Box -->
+    <!-- <div class="result_box">
+      <div class="icon">
+        <i class="fas fa-crown"></i>
+      </div>
+      <div class="complete_text">You've completed the Technical Round!</div>
+      <div class="wait_text">Wait For Result</div>
+      <div class="congratulations_text hidden">Congratulations! You are selected for the next round!</div>
+      <button class="continue_next_round hidden">Continue to Next Round</button>
+    </div> -->
+
+    <div class="result_box">
+      <div class="icon">
+        <img src="/images/logo.png" style="width: 250px; height: auto;" />
+        <!-- <i class="fas fa-crown"></i> -->
+      </div>
+      <div class="complete_text">You've completed the Technical Round!</div>
+      <div class="wait_text">Wait For Result</div>
+      
+      <!-- Congratulations Section -->
+      <div class="congratulations_text hidden">Congratulations! <br> You are selected for the next round. Best of luck!</div>
+      <button class="continue_next_round hidden">Continue to Next Round</button>
+      
+      <!-- Better Luck Next Time Section -->
+      <div class="better_luck_text hidden">Thank you for participating<br> Unfortunately, you are not selected for the next round.</div>
+      <button class="exit_btn hidden">Exit</button>
+
+    </div>
+    
+
+         <script src="/js/questions/tech_question.js"></script>
+         <script src="/js/scripts/tech_script.js"></script>
+
+         <script>
+            const videoStream = document.getElementById('videoStream');
+    const recordedVideo = document.getElementById('recordedVideo');
+    let mediaRecorder;
+    let recordedChunks = [];
+
+    // Start streaming video from the webcam and record automatically on page load
+    async function startVideoStream() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            videoStream.srcObject = stream; // Display webcam video in real-time
+            console.log('Video stream started');
+
+            // Start recording immediately
+            startRecording(stream);
+        } catch (err) {
+            console.error('Error accessing media devices:', err);
+            alert('Failed to access the camera. Please check permissions.');
+        }
+    }
+
+    // Start recording the video
+    function startRecording(stream) {
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (event) => {
+            recordedChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            recordedVideo.src = url; // Show the recorded video once stopped
+            recordedVideo.style.display = 'block'; // Show recorded video element
+        };
+
+        mediaRecorder.start();
+    }
+
+    // Call the function to start video streaming and recording on page load
+    window.onload = () => {
+        startVideoStream();
+    };
+
+    // Automatically upload video when page is about to change
+    window.addEventListener('beforeunload', async (event) => {
+        // Prepare the video data to be uploaded
+        const videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
+
+        const formData = new FormData();
+        formData.append('video', videoBlob, 'recorded-video.webm'); // Attach video file
+
+        try {
+            // Trigger the POST request to upload the video
+            await fetch('/upload-video', {
+                method: 'POST',
+                body: formData,
+            });
+
+            console.log('Video uploaded successfully.');
+        } catch (error) {
+            console.error('Error uploading video:', error);
+        }
+    });
+
+      </script>
+  </body>
+</html>

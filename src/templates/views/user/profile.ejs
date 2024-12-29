@@ -1,0 +1,522 @@
+<%- include('../partials/loader') %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords"
+        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="images/icons/icon-48x48.png" />
+
+    <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+    <title>ROE | Profile</title>
+
+    <link href="css/app.css" rel="stylesheet">
+    
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+.sidebar-item:hover{
+    color: white;
+}
+        .section-header {
+            position: relative;
+            padding: 40px;
+            z-index: 1;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .section {
+            border: 1px solid rgb(246, 245, 250);
+            background-color: rgb(246, 245, 250);
+        }
+
+        .section-body {
+            background-color: white;
+        }
+
+        .section img {
+            position: relative;
+            border: 8px solid rgb(246, 245, 250);
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            z-index: 999;
+            margin-top: -30px;
+            margin-left: 5%;
+        }
+
+        .image_name {
+            display: flex;
+            align-items: center;
+        }
+
+        .image_name button {
+            /* width: 5rem;
+                height: 2rem; */
+            font-size: small;
+            margin-left: auto;
+            margin-right: 2%;
+            background-color: rgb(66, 54, 120);
+            border: 1px solid rgb(66, 54, 120);
+            color: white;
+            border-radius: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+
+        }
+
+        .image_name button:hover {
+            background-color: rgb(66, 54, 120);
+            cursor: pointer;
+            transform: translateY(-3px);
+        }
+
+        .accordion-item {
+            padding-top: 35px;
+            padding-left: 10px;
+        }
+
+        .accordion-item h3 {
+            margin-bottom: 1%;
+            font-weight: bolder;
+        }
+
+        .accordion-item label {
+            font-size: small;
+            font-weight: bold;
+        }
+
+        .accordion-item .inp {
+            color: rgb(150, 148, 155);
+            background-color: rgb(250, 250, 250);
+            border: 2px solid rgb(237, 237, 237);
+            border-radius: 7px;
+        }
+
+        #applicationForm {
+            label {
+                color: black;
+                font-weight: 400;
+            }
+
+            input {
+                border-radius: 7px;
+                font-weight: lighter;
+            }
+        }
+
+        .modal-title {
+            margin-bottom: 4%;
+            margin-top: 4%;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .close {
+            margin-top: -13%;
+        }
+
+        @media(min-width:768px) {
+
+
+            .custom-modal-width {
+                max-width: 40%;
+            }
+        }
+
+        .save {
+            border: 1px solid rgb(66, 54, 120);
+            background-color: rgb(66, 54, 120);
+            border-radius: 30px;
+            color: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+
+        }
+
+        .resets {
+            border: 1px solid rgb(66, 54, 120);
+            background-color: transparent;
+            border-radius: 30px;
+            color: black;
+            transition: transform 0.3s, box-shadow 0.3s;
+
+        }
+
+        .save:hover {
+            border: 1px solid rgb(66, 54, 120);
+            background-color: rgb(66, 54, 120);
+            transform: translateY(-3px);
+        }
+
+        .resets:hover {
+            color: black;
+            border: 1px solid rgb(66, 54, 120);
+            background-color: transparent;
+            transform: translateY(-3px);
+
+        }
+
+        .modal-footer {
+            justify-content: space-evenly;
+        }
+
+        .modal-footer .btn {
+            height: 40px;
+            width: 100%;
+            max-width: 150px;
+        }
+        .close:hover{
+            cursor: pointer;
+            color:black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand mb-3" href="user_dashboard">
+                    <img src="/images/logo_white.png" width="44" height="44" alt="Adex home" class="logo-light"
+                        style="margin-top: -5%; margin-left: -5%;">
+                    <span class="align-middle" style="font-size: medium;">Republic of <span class="engineers">Engineers</span></span>
+                </a>
+
+                <ul class="sidebar-nav">
+                    <!-- <li class="sidebar-header">
+                    Pages
+                </li> -->
+                    <li class="sidebar-item mb-3">
+                        <a class="sidebar-link" href="user_dashboard">
+                            <i class="align-middle fas fa-home"></i>
+                            <span class="align-middle">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item mb-3">
+                        <a class="sidebar-link" href="user_job_listings">
+                            <i class="align-middle fas fa-cog"></i>
+                            <span class="align-middle">Job Listings</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item not-working mb-3">
+                        <a class="sidebar-link" href="#">
+                            <i class="align-middle fas fa-cog"></i>
+                            <span class="align-middle">Upcoming Interviews</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item not-working mb-3">
+                        <a class="sidebar-link" href="#">
+                            <i class="align-middle fas fa-cog"></i>
+                            <span class="align-middle">Completed Interviews</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item active mb-3">
+                        <a class="sidebar-link" href="settings">
+                            <i class="align-middle fas fa-cog"></i>
+                            <span class="align-middle">Settings</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item mb-3">
+                        <a class="sidebar-link" href="/logout">
+                            <i class="align-middle fas fa-sign-out-alt"></i>
+                            <span class="align-middle">Logout</span>
+                        </a>
+                    </li>
+
+
+
+                  
+            </div>
+        </nav>
+
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav navbar-align">
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                                data-bs-toggle="dropdown">
+                                <img src="images/avatars/profile.png" class="avatar img-fluid rounded-5 me-1"
+                                    alt="Charles Hall" />
+                            </a>
+
+                            <a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                <img src="images/avatars/profile.png" class="avatar img-fluid rounded-5 me-1"
+                                    alt="Charles Hall" /> <span class="text-dark"><strong>My Profile</strong></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="profile"><i class="align-middle me-1"
+                                        data-feather="user"></i> Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="settings"><i class="align-middle me-1"
+                                        data-feather="settings"></i> Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout"><i class="align-middle me-1"
+                                        data-feather="log-out"></i>Log out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="content">
+                <div class="container-fluid p-0">
+                    <section class="section">
+                        <div class="section-header">
+
+                        </div>
+                        <span class="image_name" style="font-size: large;"><img src="images/avatars/profile.png"
+                                class="rounded-circle img-fluid me-1" alt="Charles Hall" /> <b style="flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                <%= user.FirstName %>&nbsp;<%= user.LastName %>
+                            </b> <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#applyModal">Edit&nbsp; <i
+                                    class="fas fa-pencil-alt"></i></button></span>
+                        <div class="section-body">
+
+                            <div class="accordion" id="branchesAccordion">
+                                <div class="accordion-item">
+                                    <h3>Profile Details</h3>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="FirstName" class="form-label">First Name</label>
+                                            <input type="text" id="FirstName" class="form-control inp"
+                                                value="<%= user.FirstName %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="LastName" class="form-label">Last Name</label>
+                                            <input type="text" id="LastName" class="form-control inp"
+                                                value="<%= user.LastName %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="Email" class="form-label">Email</label>
+                                            <input type="email" id="Email" class="form-control inp"
+                                                value="<%= user.Email %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="Phone" class="form-label">Phone Number</label>
+                                            <input type="text" id="Phone" class="form-control inp"
+                                                value="<%= user.Phone %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="DOB" class="form-label">Date of Birth</label>
+                                            <input type="text" id="DOB" class="form-control inp" value="<%= user.DOB %>"
+                                                readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="Gender" class="form-label">Gender</label>
+                                            <input type="text" id="Gender" class="form-control inp"
+                                                value="<%= user.Gender %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="Category" class="form-label">State</label>
+                                            <input type="text" id="State" class="form-control inp"
+                                                value="<%= user.State %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="University" class="form-label">City</label>
+                                            <input type="text" id="City" class="form-control inp"
+                                                value="<%= user.City %>" readonly>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="College" class="form-label">Pincode</label>
+                                            <input type="text" id="Pincode" class="form-control inp"
+                                                value="<%= user.Pincode %>" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+
+                </div>
+            </main>
+
+
+            <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog custom-modal-width" role="document">
+                    <div class="modal-content">
+                        <div class="heading">
+                            <h4 class="modal-title" id="applyModalLabel">Edit Profile</h4>
+                            <span class="close" data-dismiss="modal" aria-label="Close"
+                                aria-hidden="true">&times;</span>
+                        </div>
+                        <hr style="width:90%; margin: 0 auto;">
+                        <div class="modal-body">
+                            <form id="applicationForm" action="/profile" method="POST" class="form">
+                                <div class="row">
+                                    <div class="input-box">
+                                        <label>First Name</label>
+                                        <input type="text" name="FirstName" placeholder="Enter first name"
+                                            class="form-control mb-3" value="<%= user.FirstName %>" pattern="[A-Za-z ]+"
+                                            title="Only alphabets are allowed" maxlength="15" required />
+                                    </div>
+                                    <div class="input-box">
+                                        <label>Last Name</label>
+                                        <input type="text" name="LastName" placeholder="Enter last name"
+                                            class="form-control mb-3" value="<%= user.LastName %>" pattern="[A-Za-z ]+"
+                                            title="Only alphabets are allowed" maxlength="15" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Phone Number</label>
+                                        <input type="text" name="Phone" placeholder="Enter phone number"
+                                            class="form-control mb-3" pattern="\d+" title="Only numbers are allowed"
+                                            maxlength="10" value="<%= user.Phone %>" maxlength="10" required />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Date of Birth</label>
+                                        <input type="date" name="DOB" placeholder="Enter birth date"
+                                            class="form-control mb-3" value="<%= user.DOB %>" min="1900-01-01"
+                                            max="2018-12-31" required />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Gender</label>
+                                        <select name="Gender" id="Gender" class="form-control mb-3" required>
+                                            <option value="">---Select your Gender---</option>
+                                            <option value="Male" <%=user.Gender==="Male" ? "selected" : "" %>>Male
+                                            </option>
+                                            <option value="Female" <%=user.Gender==="Female" ? "selected" : "" %>>Female
+                                            </option>
+                                            <option value="Others" <%=user.Gender==="Others" ? "selected" : "" %>>Others
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-box">
+                                            <label>State</label>
+                                            <input type="text" name="State" placeholder="Enter Your State"
+                                                class="form-control mb-3" value="<%= user.State %>" pattern="[A-Za-z ]+"
+                                                title="Only alphabets are allowed" maxlength="15" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="input-box">
+                                            <label>City</label>
+                                            <input type="text" name="City" placeholder="Enter Your City"
+                                                class="form-control mb-3" value="<%= user.City %>" pattern="[A-Za-z ]+"
+                                                title="Only alphabets are allowed" maxlength="15" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Pincode</label>
+                                        <input type="text" name="Pincode" placeholder="Enter your Pincode"
+                                            class="form-control mb-3" value="<%= user.Pincode %>" pattern="[0-9]+"
+                                            maxlength="10" required />
+                                    </div>
+
+
+                                    
+                                    <br>
+                                    <div class="modal-footer">
+                                        <div class="container">
+                                            <div class="row w-100">
+                                                <div class="col text-center">
+                                                    <button type="reset"
+                                                        class="btn resets w-100">Reset</button>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <button type="submit"
+                                                        class="btn btn-primary save w-100">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-12">
+                            <p class="mb-0">
+                                &copy; <a class="text-muted footer-title no-hover" href="#"> <strong>Republic of
+                                        Engineers.</strong></a> All rights reserved
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    
+    <script src="js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-link').click(function () {
+                // Toggle angle icons for the clicked dropdown
+                var angleDown = $(this).find('.fas.fa-angle-down');
+                var angleUp = $(this).find('.fas.fa-angle-up');
+                angleDown.toggleClass('d-none');
+                angleUp.toggleClass('d-none');
+            });
+
+            // Reset angle icons for other dropdowns when one is shown
+            $('#aspirants').on('show.bs.collapse', function () {
+                $('#students .fas.fa-angle-up').addClass('d-none');
+                $('#students .fas.fa-angle-down').removeClass('d-none');
+            });
+
+            $('#students').on('show.bs.collapse', function () {
+                $('#aspirants .fas.fa-angle-up').addClass('d-none');
+                $('#aspirants .fas.fa-angle-down').removeClass('d-none');
+            });
+        });
+
+        $(document).ready(function () {
+            $('.accordion-button').click(function () {
+                // Toggle the icons within this button
+                $(this).find('.fas').toggleClass('fa-angle-down fa-angle-right');
+
+                // Collapse other accordion items except this one
+                $('.accordion-button').not($(this)).each(function () {
+                    $(this).find('.fas').removeClass('fa-angle-down').addClass('fa-angle-right');
+                });
+            });
+        });
+
+        $(document).ready(function () {
+        $('.close').click(function () {
+            $('#applyModal').modal('hide');
+        });
+    });
+
+    </script>
+
+</body>
+
+</html>

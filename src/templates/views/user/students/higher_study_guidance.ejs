@@ -1,0 +1,458 @@
+<%- include('../../partials/loader') %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+        <meta name="author" content="AdminKit">
+        <meta name="keywords"
+            content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="shortcut icon" href="images/icons/icon-48x48.png" />
+
+        <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+        <title>ROE | Branches</title>
+
+        <link href="css/app.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <nav id="sidebar" class="sidebar js-sidebar">
+                <div class="sidebar-content js-simplebar">
+                    <a class="sidebar-brand mb-3" href="user_dashboard">
+                        <img src="/images/logo_white.png" width="44" height="44" alt="Adex home" class="logo-light"
+                            style="margin-top: -5%; margin-left: -5%;">
+                        <span class="align-middle" style="font-size: medium;">Republic of <span
+                                class="engineers">Engineers</span></span>
+                    </a>
+
+                    <ul class="sidebar-nav">
+
+                        <li class="sidebar-item mb-3">
+                            <a class="sidebar-link" href="user_dashboard">
+                                <i class="align-middle fas fa-home"></i>
+                                <span class="align-middle">Home</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item mb-3">
+                            <a data-bs-target="#aspirants" data-bs-toggle="collapse" class="sidebar-link"
+                                aria-expanded="true">
+                                <i class="align-middle fas fa-user-friends"></i>
+
+                                <span class="align-middle" style="margin-right: 4%;">Engineering Aspirants</span><i
+                                    class="align-middle fas fa-angle-down"></i><i
+                                    class="align-middle fas fa-angle-up d-none"></i>
+                            </a>
+                            <ul id="aspirants" class="sidebar-dropdown list-unstyled collapse"
+                                data-bs-parent="#sidebar">
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="entrance_exams"><i class="align-middle fas fa-pencil-alt"></i>
+                                        Entrance Exams</a></li>
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="explore_branches"><i class="align-middle fas fa-search"></i>
+                                        Explore Branches</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a data-bs-target="#students" data-bs-toggle="collapse" class="sidebar-link"
+                                aria-expanded="true">
+                                <i class="align-middle fas fa-user-graduate"></i>
+                                <span class="align-middle" style="margin-right: 7%;">Engineering Students</span><i
+                                    class="align-middle fas fa-angle-down"></i><i
+                                    class="align-middle fas fa-angle-up d-none"></i>
+
+
+                            </a>
+                            <ul id="students" class="sidebar-dropdown list-unstyled collapse show"
+                                data-bs-parent="#sidebar">
+                                <li class="sidebar-item active submenu" style="margin-left: 11%;"><a
+                                        class="sidebar-link" href="higher_study_guidance"><i
+                                            class="align-middle fas fa-graduation-cap"></i>
+                                        Higher Study Guidance</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a data-bs-target="#meetups" data-bs-toggle="collapse" class="sidebar-link"
+                                aria-expanded="true">
+                                <i class="align-middle fas fa-handshake"></i>
+
+                                <span class="align-middle" style="margin-right: 44%;">Meetups</span><i
+                                    class="align-middle fas fa-angle-down"></i><i
+                                    class="align-middle fas fa-angle-up d-none"></i>
+                            </a>
+                            <ul id="meetups" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="events_explorer"><i class="align-middle fas fa-search"></i>
+                                        Events Explorer</a></li>
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="my_events"><i class="align-middle fas fa-calendar-alt"></i>
+                                        My Events</a></li>
+                                <li class="sidebar-item submenu" style="margin-left: 12%;"><a class="sidebar-link"
+                                        href="create_event"><i class="align-middle fas fa-plus"></i>
+                                        Create Event</a></li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="sidebar-item mb-3">
+                            <a class="sidebar-link" href="settings">
+                                <i class="align-middle fas fa-cog"></i>
+                                <span class="align-middle">Settings</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item mb-3">
+                            <a class="sidebar-link" href="/logout">
+                                <i class="align-middle fas fa-sign-out-alt"></i>
+                                <span class="align-middle">Logout</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                </div>
+            </nav>
+
+            <div class="main">
+                <nav class="navbar navbar-expand navbar-light navbar-bg">
+                    <a class="sidebar-toggle js-sidebar-toggle">
+                        <i class="hamburger align-self-center"></i>
+                    </a>
+
+                    <div class="navbar-collapse collapse">
+                        <ul class="navbar-nav navbar-align">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#"
+                                    data-bs-toggle="dropdown">
+                                    <img src="images/avatars/kiccha.jpg" class="avatar img-fluid rounded-5 me-1"
+                                        alt="Charles Hall" />
+                                </a>
+
+                                <a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                                    <img src="images/avatars/kiccha.jpg" class="avatar img-fluid rounded-5 me-1"
+                                        alt="Charles Hall" /> <span class="text-dark"><strong>My Profile</strong></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a class="dropdown-item" href="profile"><i class="align-middle me-1"
+                                            data-feather="user"></i> Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="settings"><i class="align-middle me-1"
+                                            data-feather="settings"></i> Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logout"><i class="align-middle me-1"
+                                            data-feather="log-out"></i>Log out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main class="content">
+                    <div class="container-fluid p-0">
+                        <section class="section">
+                            <div class="section-header">
+                                <h4>Studying Abroad</h4>
+                            </div>
+                            <div class="section-body">
+                                <div class="accordion" id="branchesAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="branchOneHeading">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#general" aria-expanded="true" aria-controls="general">
+                                                <i class="fas fa-angle-right"></i><i
+                                                    class="fas fa-angle-down d-none"></i>&nbsp;&nbsp;
+                                                General Benefits
+                                            </button>
+                                        </h2>
+                                        <div id="general" class="accordion-collapse collapse"
+                                            aria-labelledby="branchOneHeading" data-bs-parent="#branchesAccordion">
+                                            <div class="accordion-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">Access to Cutting-Edge Research and
+                                                        Technology</li>
+                                                    <li class="list-group-item">Global Networking</li>
+                                                    <li class="list-group-item">Cultural Exposure</li>
+                                                    <li class="list-group-item">Enhanced Employability</li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="branchOneHeading">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#destination" aria-expanded="true"
+                                                aria-controls="destination">
+                                                <i class="fas fa-angle-right"></i><i
+                                                    class="fas fa-angle-down d-none"></i>&nbsp;&nbsp;Popular Destination
+                                                &
+                                                Programs
+                                            </button>
+                                        </h2>
+                                        <div id="destination" class="accordion-collapse collapse"
+                                            aria-labelledby="branchOneHeading" data-bs-parent="#branchesAccordion">
+                                            <div class="accordion-body">
+
+                                                <h4><strong>United States </strong></h4>
+                                                <ul>
+                                                    <li><strong>Master’s Programs:</strong> MS in Engineering, MBA
+                                                        with a focus on Engineering Management, or specialized
+                                                        fields like Artificial Intelligence, Data Science, and
+                                                        Cybersecurity.</li>
+                                                    <li><strong>Top Universities:</strong> MIT, Stanford, UC
+                                                        Berkeley, Georgia Tech, University of Michigan.</li>
+                                                </ul>
+                                                <hr><br>
+
+                                                <h4><strong>United Kingdom </strong></h4>
+                                                <ul>
+                                                    <li><strong>Master’s Programs:</strong> MSc in Engineering
+                                                        disciplines, MEng in various specializations, MBA with a
+                                                        focus on technology management.</li>
+                                                    <li><strong>Top Universities:</strong> University of Cambridge,
+                                                        University of Oxford, Imperial College London, University
+                                                        College London (UCL).</li>
+                                                </ul>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="branchOneHeading">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#fields" aria-expanded="true" aria-controls="fields">
+                                                <i class="fas fa-angle-right"></i><i
+                                                    class="fas fa-angle-down d-none"></i>&nbsp;&nbsp;Specialized Fields
+                                                &
+                                                Programs
+                                            </button>
+                                        </h2>
+                                        <div id="fields" class="accordion-collapse collapse"
+                                            aria-labelledby="branchOneHeading" data-bs-parent="#branchesAccordion">
+                                            <div class="accordion-body">
+
+                                                <h4><strong>Computer Science & IT</strong></h4>
+                                                <ul>
+                                                    <li><strong>Programs:</strong> MS in Computer Science, Data
+                                                        Science, Artificial Intelligence, Cybersecurity.</li>
+                                                    <li><strong>Countries:</strong> USA, UK, Canada, Germany.</li>
+                                                </ul>
+                                                <hr><br>
+
+
+                                                <h4><strong>Mechanical Engineering</strong></h4>
+                                                <ul>
+                                                    <li><strong>Programs:</strong> MSc in Mechanical Engineering,
+                                                        Automotive Engineering, Robotics.</li>
+                                                    <li><strong>Countries:</strong> Germany, USA, UK, Japan.</li>
+                                                </ul>
+                                                <hr><br>
+
+                                                <h4><strong>Electronics & Communication Engineering</strong></h4>
+                                                <ul>
+                                                    <li><strong>Programs:</strong> MSc in Electronics & Communication
+                                                        Engineering, Telecommunications, Signal Processing.</li>
+                                                    <li><strong>Countries:</strong> USA, UK, Canada, Australia,
+                                                        Singapore.</li>
+                                                </ul>
+                                                <hr><br>
+
+                                                <h4><strong>Electrical & Electronics Engineering</strong></h4>
+                                                <ul>
+                                                    <li><strong>Programs:</strong> MSc in Electrical and Electronics
+                                                        Engineering, Power Systems, Renewable Energy.</li>
+                                                    <li><strong>Countries:</strong> USA, UK, Canada, Australia,
+                                                        Germany.</li>
+                                                </ul>
+                                                <hr><br>
+
+                                                <h4><strong>Civil Engineering</strong></h4>
+                                                <ul>
+                                                    <li><strong>Programs:</strong> MSc in Civil Engineering,
+                                                        Structural Engineering, Environmental Engineering.</li>
+                                                    <li><strong>Countries:</strong> USA, UK, Canada, Australia, New
+                                                        Zealand.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="branchOneHeading">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#process" aria-expanded="true" aria-controls="process">
+                                                <i class="fas fa-angle-right"></i><i
+                                                    class="fas fa-angle-down d-none"></i>&nbsp;&nbsp;Application Process
+                                                &
+                                                Requirements
+                                            </button>
+                                        </h2>
+                                        <div id="process" class="accordion-collapse collapse"
+                                            aria-labelledby="branchOneHeading" data-bs-parent="#branchesAccordion">
+                                            <div class="accordion-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item"><strong>Entrance Exams:</strong> GRE,
+                                                        TOEFL/IELTS for most English-speaking countries. Some European
+                                                        countries may require additional language tests.</li>
+                                                    <li class="list-group-item"><strong>Documentation:</strong>
+                                                        Transcripts, Statement of Purpose (SOP), Letters of
+                                                        Recommendation (LORs), CV/Resume, Portfolio (if applicable).
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Scholarships and
+                                                            Funding:</strong> Look for scholarships offered by
+                                                        universities, governments (like DAAD for Germany), and
+                                                        organizations (like Fulbright for the USA).</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="branchOneHeading">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#scholarships" aria-expanded="true"
+                                                aria-controls="scholarships">
+                                                <i class="fas fa-angle-right"></i><i
+                                                    class="fas fa-angle-down d-none"></i>&nbsp;&nbsp;Scholarships and
+                                                Financial
+                                                Aid
+                                            </button>
+                                        </h2>
+                                        <div id="scholarships" class="accordion-collapse collapse"
+                                            aria-labelledby="branchOneHeading" data-bs-parent="#branchesAccordion">
+                                            <div class="accordion-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item"><strong>USA:</strong> Fulbright
+                                                        Scholarships, university-specific scholarships.</li>
+                                                    <li class="list-group-item"><strong>UK:</strong> Chevening
+                                                        Scholarships, Commonwealth Scholarships.</li>
+                                                    <li class="list-group-item"><strong>Germany:</strong> DAAD
+                                                        Scholarships.</li>
+                                                    <li class="list-group-item"><strong>Canada:</strong> Vanier Canada
+                                                        Graduate Scholarships, university-specific awards.</li>
+                                                    <li class="list-group-item"><strong>Australia:</strong> Australia
+                                                        Awards Scholarships, university-specific scholarships.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="branchOneHeading">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#steps" aria-expanded="true" aria-controls="steps">
+                                                <i class="fas fa-angle-right"></i><i
+                                                    class="fas fa-angle-down d-none"></i>&nbsp;&nbsp;Steps to Get
+                                                Started
+                                            </button>
+                                        </h2>
+                                        <div id="steps" class="accordion-collapse collapse"
+                                            aria-labelledby="branchOneHeading" data-bs-parent="#branchesAccordion">
+                                            <div class="accordion-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item"><strong>Research:</strong> Start by
+                                                        identifying your field of interest and potential universities.
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Prepare for Exams:</strong>
+                                                        Schedule and prepare for necessary entrance exams.</li>
+                                                    <li class="list-group-item"><strong>Gather Documents:</strong>
+                                                        Collect all required documents well in advance.</li>
+                                                    <li class="list-group-item"><strong>Apply for Scholarships:</strong>
+                                                        Research and apply for financial aid and scholarships.</li>
+                                                    <li class="list-group-item"><strong>Apply to Universities:</strong>
+                                                        Submit applications to chosen universities, keeping track of
+                                                        deadlines.</li>
+                                                    <br>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Add more accordion items for other branches -->
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </main>
+
+
+
+
+
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row text-muted">
+                            <div class="col-12">
+                                <p class="mb-0">
+                                    &copy; <a class="text-muted footer-title no-hover" href="#"> <strong>Republic of
+                                            Engineers.</strong></a> All rights reserved
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="js/app.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('.sidebar-link').click(function () {
+                    // Toggle angle icons for the clicked dropdown
+                    var angleDown = $(this).find('.fas.fa-angle-down');
+                    var angleUp = $(this).find('.fas.fa-angle-up');
+                    angleDown.toggleClass('d-none');
+                    angleUp.toggleClass('d-none');
+                });
+
+                // Reset angle icons for other dropdowns when one is shown
+                $('#aspirants').on('show.bs.collapse', function () {
+                    $('#students .fas.fa-angle-up').addClass('d-none');
+                    $('#students .fas.fa-angle-down').removeClass('d-none');
+                });
+
+                $('#students').on('show.bs.collapse', function () {
+                    $('#aspirants .fas.fa-angle-up').addClass('d-none');
+                    $('#aspirants .fas.fa-angle-down').removeClass('d-none');
+                });
+            });
+
+            $(document).ready(function () {
+                $('.accordion-button').click(function () {
+                    // Toggle the icons within this button
+                    $(this).find('.fas').toggleClass('fa-angle-down fa-angle-right');
+
+                    // Collapse other accordion items except this one
+                    $('.accordion-button').not($(this)).each(function () {
+                        $(this).find('.fas').removeClass('fa-angle-down').addClass('fa-angle-right');
+                    });
+                });
+            });
+
+
+        </script>
+
+    </body>
+
+    </html>

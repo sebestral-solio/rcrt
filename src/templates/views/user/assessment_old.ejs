@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Assessment</title>
+    <style>
+        /* Global Styles */
+        body {
+            /* background-color: #f4f7fb; */
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #2c3e50, rgb(42,29,90), #8e44ad, #3e8e7e);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            height: 100vh;
+            overflow: hidden;
+        }
+        @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+        /* Container Styling */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1, h2 {
+            color: #2a1d5a;
+            /* text-align: center; */
+        }
+
+        h1 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+
+        /* Buttons */
+        .button {
+            display: inline-block;
+            padding: 5px 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background-color: #2a1d5a;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .button:disabled {
+            background-color: #a9a9a9;
+            cursor: not-allowed;
+        }
+
+        .button:hover:not(:disabled) {
+            background-color: transparent;
+            border: 2px solid rgb(42, 29, 90);
+            color: rgb(42, 29, 90);
+        }
+
+       
+        /* File Input Styling */
+        input[type="file"] {
+            display: block;
+            padding: 6px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #2a1d5a;
+        }
+
+        /* Skills List */
+        .skills-list {
+            margin: 20px 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skills-list li {
+            background-color: #f5f5f5;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .skills-list li.match {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        /* Alerts and Notifications */
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Message Section */
+        #message {
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Buttons section at the bottom */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .action-buttons button {
+            width: 48%;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+        }
+        .skills-list{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Message display section -->
+    <div id="message"></div>
+    <div class="container">
+        <h1>Upload Resume</h1>
+
+        <!-- Resume upload form -->
+        <form action="/upload-resume" id="uploadForm" enctype="multipart/form-data">
+            <div class="upload-parse-container">
+                <input type="file" name="resume" id="resume" required>
+                <button type="submit" class="button upload-resume">Upload</button>
+            </div>
+            
+        </form>
+
+        <!-- Parse resume button (Initially hidden) -->
+        <button id="parseBtn" class="button" style="display:none;" disabled>Parse</button>
+
+        
+
+        <br>
+        <h1 id="ext_skill" style="display: none;">Extracted Skills</h1>
+        <ul id="skillsList" class="skills-list"></ul>
+
+        <!-- Display eligibility message -->
+         
+        <div id="eligibilityMessage"></div>
+
+        <!-- Buttons -->
+        <div class="action-buttons">
+            <button id="exitBtn" class="button" style="display:none;" disabled>Exit</button>
+            <button id="proceedBtn" class="button" style="display:none;" disabled>Take Test</button>
+        </div>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('uploadForm');
+        const parseBtn = document.getElementById('parseBtn');
+        const skillsList = document.getElementById('skillsList');
+        const proceedBtn = document.getElementById('proceedBtn');
+        const exitBtn = document.getElementById('exitBtn');
+        const messageDiv = document.getElementById('message');
+        const eligibilityMessage = document.getElementById('eligibilityMessage');
+        const uploadBtn = document.querySelector('.upload-resume');
+        const ext_skill = document.getElementById('ext_skill');
+
+       // Helper function to show messages
+function showMessage(message, type = 'info') {
+    messageDiv.textContent = message;
+    messageDiv.style.color = type === 'error' ? 'white' : (type === 'success' ? 'white' : 'white');
+
+    // Hide the message after 2 seconds
+    setTimeout(() => {
+        messageDiv.textContent = '';  // Clear the message
+    }, 2000);  // 2000ms = 2 seconds
+}
+    
+        // Upload Resume Form Submission
+        uploadForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+    
+            const formData = new FormData(uploadForm);
+    
+            showMessage('Uploading resume...', 'info'); // Show message
+    
+            // Set timeout to show "Uploading resume..." for at least 2 seconds
+            setTimeout(async () => {
+                try {
+                    const response = await fetch('/upload-resume', {
+                        method: 'POST',
+                        body: formData
+                    });
+    
+                    const data = await response.json();
+    
+                    if (response.ok && data.success) {
+                        showMessage(data.message, 'success'); // Show success message
+                        uploadBtn.style.display = 'none'; // Hide the upload button
+                        parseBtn.style.display = 'inline-block'; // Show the parse button
+                        parseBtn.disabled = false; // Enable the "Parse Resume" button
+                    } else {
+                        showMessage(data.message || 'Error uploading resume!', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error during upload:', error);
+                    showMessage('Failed to upload resume!', 'error');
+                }
+            }, 2000); // Wait for 2 seconds before making the upload request
+        });
+    
+        parseBtn.addEventListener('click', async () => {
+            showMessage('Parsing resume...', 'info'); // Show parsing message
+    
+            // Set timeout to show "Parsing resume..." for at least 2 seconds
+            setTimeout(async () => {
+                // Extract query parameters from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const jobId = urlParams.get('id');
+                const companyName = urlParams.get('company_name');
+                const skills = urlParams.get('skills');
+                const role = urlParams.get('role');
+                const ctc = urlParams.get('ctc');
+    
+                try {
+                    const response = await fetch('/parse-resume', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            jobId: jobId,  // Replace with actual jobId
+                            companyName: companyName,  // Replace with actual company name
+                            skills: skills,  // Replace with actual skills
+                            role: role,  // Replace with actual role
+                            ctc: ctc  // Replace with actual CTC
+                        })
+                    });
+    
+                    const data = await response.json();
+    
+                    if (data.success) {
+                        showMessage('Resume successfully parsed!', 'success');
+                        ext_skill.style.display = 'block';
+
+                        // Display extracted skills
+                        skillsList.innerHTML = ''; // Clear existing skills
+                        data.skills.forEach(skill => {
+                            const li = document.createElement('li');
+                            li.textContent = skill;
+                            skillsList.appendChild(li);
+                        });
+    
+                        // Calculate matching percentage
+                        const matchPercentage = data.matchPercentage;
+                        eligibilityMessage.textContent = `Matching Skills: ${data.matchingSkills.length} out of ${data.normalizedJobSkills.length}`;
+                        if (matchPercentage >= 70) {
+                            eligibilityMessage.style.color = 'green';
+                            eligibilityMessage.textContent += ` (Eligible)`;
+                            proceedBtn.disabled = false;
+                            proceedBtn.style.display = 'inline-block'; // Show proceed button
+                        } else {
+                            eligibilityMessage.style.color = 'red';
+                            eligibilityMessage.textContent += ` (Not Eligible)`;
+                            exitBtn.disabled = false;
+                            exitBtn.style.display = 'inline-block'; // Show exit button
+                        }
+                    } else {
+                        showMessage('Error parsing resume.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error during parsing:', error);
+                    showMessage('Error parsing resume!', 'error');
+                }
+            }, 2000); // Wait for 2 seconds before making the API request
+        });
+    
+        // Proceed to MCQ Test
+        proceedBtn.addEventListener('click', () => {
+            // Extract URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get('id');
+            const companyName = urlParams.get('company_name');
+            const skills = urlParams.get('skills');
+            const role = urlParams.get('role');
+            const ctc = urlParams.get('ctc');
+    
+            // Construct new URL with parameters for MCQ page
+            const mcqUrl = `/mcq?id=${jobId}&company_name=${companyName}&skills=${skills}&role=${role}&ctc=${ctc}`;
+    
+            // Redirect to MCQ page
+            window.location.href = mcqUrl;
+        });
+    
+        // Exit Button functionality
+        exitBtn.addEventListener('click', () => {
+            window.location.href = '/'; // Redirect to homepage or another page
+        });
+    </script>
+</body>
+</html>

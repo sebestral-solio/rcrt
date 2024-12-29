@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Coding Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css">
+    
+    <style>
+        /* Reset and global styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e2f;
+            color: #ffffff;
+        }
+        #submitBtn:disabled {
+    opacity: 0.5; /* Reduce opacity */
+    cursor: not-allowed; /* Change cursor to 'not-allowed' */
+}
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+        }
+
+        /* Question Panel */
+        .question-panel {
+            width: 30%;
+            padding: 20px;
+            background-color: #2c2c3b;
+            border-right: 1px solid #444;
+            overflow-y: auto;
+        }
+        .question-panel h2 {
+            margin-bottom: 10px;
+            color: #f5a623;
+        }
+        .question-panel p, .question-panel h3 {
+            line-height: 1.6;
+            color: #bbbbbb;
+        }
+
+        /* Editor Panel */
+        .editor-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #1e1e2f;
+        }
+        .editor-container {
+            flex: 1;
+            border: 1px solid #444;
+            border-radius: 5px;
+            overflow: auto;  /* Enables scrolling */
+            position: relative;
+            height: 500px;  /* Set a fixed height for the editor */
+        }
+
+        .CodeMirror .CodeMirror-cursor {
+            border-left: 4px solid #f5a623;
+            animation: blink 0.5s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .editor-panel .buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .editor-panel button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            background-color: #f5a623;
+            color: #1e1e2f;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .editor-panel button:hover {
+            background-color: #ffa94d;
+        }
+
+        /* Output Panel */
+        .output-panel {
+            background: #2c2c3b;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            font-family: "Courier New", monospace;
+            white-space: pre-wrap;
+            color: #ffffff;
+            height: 150px;
+            overflow-y: auto;
+        }
+
+        /* CodeMirror Customization */
+        .CodeMirror {
+            height: 100%;
+            font-size: 14px;
+            background-color: #282c34;
+            color: #ffffff;
+        }
+        .CodeMirror-gutters {
+            background-color: #282c34;
+            color: #626262;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .question-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #444;
+            }
+        }
+
+/* Spinner Styles */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #f5a623;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px; /* Space between spinner and button */
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+ /* Video display */
+ video {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #fff;
+        }
+    </style>
+    
+
+    
+</head>
+<body>
+        <!-- Video display section (real-time streaming) -->
+        <video id="videoStream" autoplay muted></video>
+
+        <!-- Recorded Video section (to show recorded video later) -->
+        <video id="recordedVideo" controls style="display:none; margin-top: 10px;"></video>
+    <div class="container">
+        <!-- Question Panel -->
+        <div class="question-panel" id="question-panel">
+            <h2 id="question-title">Programming Question</h2>
+            <p id="question-text">Loading question...</p>
+        </div>
+
+        <!-- Editor Panel -->
+        <div class="editor-panel">
+            <div class="editor-container" id="editor-container"></div>
+            <div class="buttons">
+                <div id="spinner" class="spinner" style="display: none;"></div>
+                <button id="runBtn">Run Code</button>
+                <button id="submitBtn">Submit</button>
+            </div>
+            <div class="output-panel" id="output"></div>
+        </div>
+    </div>
+    <div id="user_email" data-user-email="<%= userEmail %>"></div>
+    <div id="company_id" data-company-id="<%= jobId %>"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/python/python.min.js"></script>
+    <!-- CodeMirror core library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/codemirror.min.js"></script>
+
+<!-- CodeMirror theme (optional) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/theme/dracula.min.css" />
+
+<!-- CodeMirror Python Mode -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.10/mode/python/python.min.js"></script>
+
+    <script type="text/javascript" src="js/scripts/coding_script.js"></script>
+    <script>
+        const videoStream = document.getElementById('videoStream');
+ const recordedVideo = document.getElementById('recordedVideo');
+ let mediaRecorder;
+ let recordedChunks = [];
+
+ // Start streaming video from the webcam and record automatically on page load
+ async function startVideoStream() {
+     try {
+         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+         videoStream.srcObject = stream; // Display webcam video in real-time
+         console.log('Video stream started');
+
+         // Start recording immediately
+         startRecording(stream);
+     } catch (err) {
+         console.error('Error accessing media devices:', err);
+         alert('Failed to access the camera. Please check permissions.');
+     }
+ }
+
+ // Start recording the video
+ function startRecording(stream) {
+     recordedChunks = [];
+     mediaRecorder = new MediaRecorder(stream);
+
+     mediaRecorder.ondataavailable = (event) => {
+         recordedChunks.push(event.data);
+     };
+
+     mediaRecorder.onstop = () => {
+         const blob = new Blob(recordedChunks, { type: 'video/webm' });
+         const url = URL.createObjectURL(blob);
+         recordedVideo.src = url; // Show the recorded video once stopped
+         recordedVideo.style.display = 'block'; // Show recorded video element
+     };
+
+     mediaRecorder.start();
+ }
+
+ // Call the function to start video streaming and recording on page load
+ window.onload = () => {
+     startVideoStream();
+ };
+
+ // Automatically upload video when page is about to change
+ window.addEventListener('beforeunload', async (event) => {
+     // Prepare the video data to be uploaded
+     const videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
+
+     const formData = new FormData();
+     formData.append('video', videoBlob, 'recorded-video.webm'); // Attach video file
+
+     try {
+         // Trigger the POST request to upload the video
+         await fetch('/upload-video', {
+             method: 'POST',
+             body: formData,
+         });
+
+         console.log('Video uploaded successfully.');
+     } catch (error) {
+         console.error('Error uploading video:', error);
+     }
+ });
+
+   </script>
+</body>
+</html>
+    
